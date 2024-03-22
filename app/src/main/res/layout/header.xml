@@ -8,15 +8,15 @@
     android:padding="11dp"
     >
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:src="@drawable/sharp_ar_on_you_24"
         android:layout_marginBottom="11dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi Dear,\nWhat's Up?"
+        android:text="Hi Dear,\nWhat's Up?\n-Mahadi"
         />
 
 </LinearLayout>
