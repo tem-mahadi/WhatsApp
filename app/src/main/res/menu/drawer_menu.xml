@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/chats"
+        android:title="Chats"
+        android:icon="@drawable/baseline_chat_24"/>
+<item
+    android:id="@+id/opt_marketplace"
+    android:icon="@drawable/rounded_add_business_24"
+    android:title="Marketplace"/>
+
+    <item
+        android:id="@+id/opt_msgrq"
+        android:icon="@drawable/rounded_business_messages_24"
+        android:title="Message requests"
+        />
+    <item
+        android:id="@+id/opt_archive"
+        android:icon="@drawable/baseline_archive_24"
+        android:title="Archive"
+        />
+</menu>
