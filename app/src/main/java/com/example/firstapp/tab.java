@@ -3,6 +3,7 @@ package com.example.firstapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Entity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
-
 
 public class tab extends Fragment {
     ViewPager viewPager;
