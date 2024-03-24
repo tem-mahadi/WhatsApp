@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,8 +49,12 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new frag_request());
                 } else if (id == R.id.chats) {
                     loadFragment(new tab());
-                } else {
+                } else if(id== R.id.opt_archive){
                     loadFragment(new frag_archive());
+                } else {
+                    Intent intent= new Intent(getApplicationContext(), LoginPage2.class);
+                    startActivity(intent);
+                    finish();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
