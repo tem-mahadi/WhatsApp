@@ -5,14 +5,28 @@
     android:layout_height="match_parent"
     tools:context=".Chats">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Chatting List Here"
-        android:gravity="center"
-        android:textColor="#00C853"
-        android:background="#3A3434"
-        android:textSize="20sp"/>
+        android:layout_height="match_parent">
+
+        <!-- TextView to display behind the RecyclerView -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Chatting List Here"
+            android:gravity="center"
+            android:textColor="#00C853"
+            android:background="#3A3434"
+            android:textSize="20sp"/>
+
+        <!-- RecyclerView to display the chat items -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+    </RelativeLayout>
 
 </FrameLayout>

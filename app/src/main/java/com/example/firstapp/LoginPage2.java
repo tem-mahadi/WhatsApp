@@ -30,6 +30,7 @@ public class LoginPage2 extends AppCompatActivity {
             public void onClick(View view) {
                 if(check()){
                     Intent intent = new Intent(LoginPage2.this,MainActivity.class);
+                    intent.putExtra("username",usernm);
                     startActivity(intent);
                     finish();
                 } else

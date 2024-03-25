@@ -1,6 +1,7 @@
 package com.example.firstapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +29,8 @@ import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar; DrawerLayout drawerLayout; NavigationView navigationView;
+    TextView t;
+    ImageView setimg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +39,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigation);
+        View headerView = navigationView.getHeaderView(0);
+        setimg = headerView.findViewById(R.id.setimg);
+        t = headerView.findViewById(R.id.headerName);
+        String USER_NAME = getIntent().getStringExtra("username");
 
+        t.setText("Hi "+USER_NAME+",\nWhat's Up?");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         loadFragment(new tab());
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -61,6 +72,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+                setimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gallery= new Intent(Intent.ACTION_PICK);
+                gallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(gallery,100);
+            }
+        });
+
+    }
+
+        @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode== RESULT_OK){
+            if(requestCode==100){
+                assert data != null;
+                setimg.setImageURI(data.getData());
+//                Bitmap bitmap = null;
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                db.entityDao().updateImage(bitmap,USER_NAME);
+            }
+        }
     }
 
     @Override
