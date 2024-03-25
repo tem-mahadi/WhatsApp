@@ -2,7 +2,9 @@ package com.example.firstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,15 @@ public class LoginPage2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page2);
 
+        SharedPreferences sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        if (sharedPref.getBoolean("next", false)) {
+            // If the user is already logged in, start MainActivity and finish LoginActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return; // Exit onCreate to prevent further execution
+        }
+
         myDB= MyDB.getDB(this);
         username = findViewById(R.id.username);
         password= findViewById(R.id.password);
@@ -30,7 +41,10 @@ public class LoginPage2 extends AppCompatActivity {
             public void onClick(View view) {
                 if(check()){
                     Intent intent = new Intent(LoginPage2.this,MainActivity.class);
-                    intent.putExtra("username",usernm);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("username", usernm);
+                    editor.putBoolean("next", true);
+                    editor.apply();
                     startActivity(intent);
                     finish();
                 } else

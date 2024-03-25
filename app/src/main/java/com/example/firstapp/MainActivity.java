@@ -12,8 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         setimg = headerView.findViewById(R.id.setimg);
         t = headerView.findViewById(R.id.headerName);
-        String USER_NAME = getIntent().getStringExtra("username");
+        SharedPreferences sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String USER_NAME = sharedPref.getString("username", null);
 
         t.setText("Hi "+USER_NAME+",\nWhat's Up?");
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
@@ -64,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new frag_archive());
                 } else {
                     Intent intent= new Intent(getApplicationContext(), LoginPage2.class);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("next", false);
+                    editor.apply();
                     startActivity(intent);
                     finish();
                 }

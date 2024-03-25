@@ -5,7 +5,7 @@
     android:layout_height="176dp"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="11dp"
+    android:padding="20dp"
     >
     <ImageView
         android:layout_width="70dp"
